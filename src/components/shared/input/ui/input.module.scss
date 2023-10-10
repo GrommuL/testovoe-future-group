@@ -1,0 +1,31 @@
+.box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  width: 100%;
+  background-color: var(--bg);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: var(--transition);
+
+  &:hover {
+    border: 1px solid var(--primary);
+  }
+
+  svg {
+    stroke: var(--primary);
+  }
+}
+
+.input {
+  height: 100%;
+  width: 100%;
+  font-size: 16px;
+  background: transparent;
+
+  &::placeholder {
+    font-size: 14px;
+    color: var(--tertiary);
+  }
+}
