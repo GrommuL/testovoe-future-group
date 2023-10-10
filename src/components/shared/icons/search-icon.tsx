@@ -7,7 +7,7 @@ export const SearchIcon = () => {
       viewBox='0 0 20 20'
       fill='none'
     >
-      <circle cx='8' cy='8' r='7' stroke-width='2' />
+      <circle cx='8' cy='8' r='7' strokeWidth='2' />
       <path
         d='M19 19L13 13'
         strokeWidth='2'
