@@ -1,0 +1,27 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  color: var(--white);
+  background-color: var(--primary);
+  border-radius: 8px;
+  transition: var(--transition);
+  font-size: 16px;
+
+  &:hover {
+    background-color: var(--dark);
+  }
+
+  &:active {
+    background-color: var(--black);
+  }
+
+  &:disabled {
+    cursor: auto;
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+  }
+}
