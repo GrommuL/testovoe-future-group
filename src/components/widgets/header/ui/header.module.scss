@@ -1,0 +1,19 @@
+.header {
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.header_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header_search {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
