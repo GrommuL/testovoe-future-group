@@ -4,6 +4,9 @@ import { SearchIcon } from '@/components/shared/icons/search-icon'
 import { useSearch } from '@/hooks/use-search'
 
 import style from './header.module.scss'
+import { Select } from '@/components/shared/select'
+import { categories } from '@/common/categories'
+import { sortBy } from '@/common/sort-by'
 
 export const Header = () => {
   const { getSearchValue } = useSearch()
@@ -16,7 +19,10 @@ export const Header = () => {
             <Input leftIcon={<SearchIcon />} placeholder='Find a book...' />
             <Button type='submit'>Search</Button>
           </form>
-          <div></div>
+          <div className={style.header_filters}>
+            <Select options={categories} />
+            <Select options={sortBy} />
+          </div>
         </div>
       </div>
     </header>
