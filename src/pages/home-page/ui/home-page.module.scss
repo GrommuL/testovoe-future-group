@@ -1,0 +1,37 @@
+.home {
+  padding: 50px 0;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.books {
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  grid-template-rows: auto;
+  gap: 20px;
+}
+
+@media (max-width: 1300px) {
+  .books {
+    grid-template-columns: repeat(3, 300px);
+  }
+}
+@media (max-width: 987px) {
+  .books {
+    grid-template-columns: repeat(2, 300px);
+  }
+}
+@media (max-width: 678px) {
+  .books {
+    grid-template-columns: repeat(1, 300px);
+  }
+}
