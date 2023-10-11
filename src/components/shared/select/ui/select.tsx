@@ -13,12 +13,13 @@ import { SelectUpIcon } from '@/components/shared/icons/select-up-icon'
 import style from './select.module.scss'
 
 interface SelectProps {
-  options: SelectType
+  options: SelectType<string>
+  setValue: (value: string) => void
+  value: string
 }
 
-export const Select = ({ options }: SelectProps) => {
+export const Select = ({ options, setValue, value }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [value, setValue] = useState(options.selectItems[0])
   const dropdownRef = useRef() as MutableRefObject<HTMLDivElement>
 
   const clickOutsideModal = useCallback(
