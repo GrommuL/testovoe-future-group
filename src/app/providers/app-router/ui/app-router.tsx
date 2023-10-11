@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
+
 import { Layout } from '@/app/layout'
 import { RouteConfig } from '@/config/route-config'
 import { PageLoader } from '@/components/widgets/page-loader'
