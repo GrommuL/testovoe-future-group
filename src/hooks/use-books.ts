@@ -1,0 +1,43 @@
+import { instance } from '@/config/axios-config/axios-config'
+import { envConfig } from '@/config/env-config/env-config'
+import { booksActions } from '@/store/slices/books-slice'
+import { BookApiResponse } from '@/types/books-type'
+import { useEffect } from 'react'
+import { useAppDispatch } from './redux/use-app-dispatch'
+import { useAppSelector } from './redux/use-app-selector'
+
+export const useBooks = () => {
+  const dispatch = useAppDispatch()
+  const { setStatus, addErrorMessage, getBooks, getNumberOfBooksFound } =
+    booksActions
+  const { category, searchValue, sortBy } = useAppSelector(
+    (state) => state.filterReducer
+  )
+  const { isLoading, books, numberOfBooksFound } = useAppSelector(
+    (state) => state.booksReducer
+  )
+
+  const fetchBooks = async () => {
+    const categoryValue = category === 'all' ? '' : category
+    try {
+      dispatch(setStatus(true))
+      const { data }: { data: BookApiResponse } = await instance.get(
+        `/v1/volumes?q=intitle:${searchValue}+subject:${categoryValue}&orderBy=${sortBy}&key=${envConfig.API_KEY}`
+      )
+      dispatch(getBooks(data.items))
+      dispatch(getNumberOfBooksFound(data.totalItems))
+      dispatch(setStatus(false))
+    } catch (error) {
+      dispatch(setStatus(false))
+      dispatch(addErrorMessage('Error receiving books'))
+    } finally {
+      dispatch(setStatus(false))
+    }
+  }
+
+  useEffect(() => {
+    fetchBooks()
+  }, [searchValue, category, sortBy])
+
+  return { isLoading, books, numberOfBooksFound, fetchBooks }
+}

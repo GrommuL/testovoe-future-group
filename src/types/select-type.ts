@@ -1,4 +1,4 @@
-export type SelectType = {
+export type SelectType<T> = {
   selectTitle: string
-  selectItems: string[]
+  selectItems: T[]
 }
