@@ -8,12 +8,17 @@ import { useAppSelector } from './redux/use-app-selector'
 
 export const useBooks = () => {
   const dispatch = useAppDispatch()
-  const { setStatus, addErrorMessage, getBooks, getNumberOfBooksFound } =
-    booksActions
+  const {
+    setStatus,
+    addErrorMessage,
+    getBooks,
+    getNumberOfBooksFound,
+    getMoreBooks
+  } = booksActions
   const { category, searchValue, sortBy } = useAppSelector(
     (state) => state.filterReducer
   )
-  const { isLoading, books, numberOfBooksFound } = useAppSelector(
+  const { isLoading, books, numberOfBooksFound, startIndex } = useAppSelector(
     (state) => state.booksReducer
   )
 
@@ -35,9 +40,21 @@ export const useBooks = () => {
     }
   }
 
+  const getMore = async () => {
+    const categoryValue = category === 'all' ? '' : category
+    try {
+      const { data }: { data: BookApiResponse } = await instance.get(
+        `/v1/volumes?q=intitle:${searchValue}+subject:${categoryValue}&orderBy=${sortBy}&startIndex=${startIndex}&maxResults=30&key=${envConfig.API_KEY}`
+      )
+      dispatch(getMoreBooks(data.items))
+    } catch (error) {
+      dispatch(addErrorMessage('Error receiving books'))
+    }
+  }
+
   useEffect(() => {
     fetchBooks()
   }, [searchValue, category, sortBy])
 
-  return { isLoading, books, numberOfBooksFound, fetchBooks }
+  return { isLoading, books, numberOfBooksFound, fetchBooks, getMore }
 }
