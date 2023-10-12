@@ -53,6 +53,9 @@
   &_authors {
     font-size: 14px;
     color: var(--tertiary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
