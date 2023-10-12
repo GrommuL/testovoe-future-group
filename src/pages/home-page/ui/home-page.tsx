@@ -1,11 +1,12 @@
 import { BookCard } from '@/components/book-card'
 import { Loader } from '@/components/shared/loader'
 import { useBooks } from '@/hooks/use-books'
+import { Button } from '@/components/shared/button'
 
 import style from './home-page.module.scss'
 
 const HomePage = () => {
-  const { isLoading, books, numberOfBooksFound } = useBooks()
+  const { isLoading, books, numberOfBooksFound, getMore } = useBooks()
 
   if (isLoading) return <Loader />
 
@@ -30,6 +31,7 @@ const HomePage = () => {
               />
             ))}
           </div>
+          <Button onClick={getMore}>Load More</Button>
         </section>
       </div>
     </main>
