@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface BooksState {
   books: BookItem[]
   numberOfBooksFound: number
+  startIndex: number
   isLoading: boolean
   error: string
 }
@@ -11,6 +12,7 @@ export interface BooksState {
 const initialState: BooksState = {
   books: [],
   numberOfBooksFound: 0,
+  startIndex: 10,
   isLoading: false,
   error: ''
 }
@@ -33,6 +35,13 @@ const booksSlice = createSlice({
     },
     getNumberOfBooksFound: (state, action: PayloadAction<number>) => {
       state.numberOfBooksFound = action.payload
+    },
+    getMoreBooks: (state, action: PayloadAction<BookItem[]>) => {
+      state.books = [...state.books, ...action.payload].filter(
+        (item, idx, array) =>
+          array.findIndex((element) => element.id === item.id) === idx
+      )
+      state.startIndex = state.books.length
     }
   }
 })
